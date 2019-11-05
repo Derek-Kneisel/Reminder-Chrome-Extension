@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!--BOOTSTRAP STUFF-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <style>
+    #grid1 {
+      width: 265px;
+      height: 19000px;
+      background-color: #212121;
+    }
+
+    #font1 {
+      color: beige;
+      font-family: Verdana;
+      font-size: 14px;
+    }
+
+    #font2 {
+      color: beige;
+      font-family: Verdana;
+      font-size: 11px;
+      font-weight: lighter;
+    }
+
+    #checkButton {
+      background: #212121;
+      height: 15px;
+      width: 12px;
+      border-radius: 50%;
+      border: 1px solid deepskyblue;
+    }
+
+    label {
+      color: beige;
+    }
+
+  </style>
+</head>
+
+<!--ENTER REMINDER-->
+<div class="form-group">
+  <label for="usr">Reminder:</label>
+  <input type="text" class="form-control" id="usr" style="background-color: #212121">
+</div>
+<!--ENTER DUE DATE-->
+<div class="form-group">
+  <label for="pwd">Due Date:</label>
+  <input type="password" class="form-control" id="pwd" style="background-color: #212121">
+</div>
+<!--SUBMIT BUTTON-->
+<button type="button" class="btn btn-primary btn-lg btn-block">Block level button</button>
+
+<body id="grid1">
+<table class="table">
+  <thead>
+  <tr>
+    <th style="font-family: Verdana; color: beige">Reminders:</th>
+  </tr>
+  </thead>
+  <tbody id="font1">
+  <tr>
+    <td>Weekly report
+      <!--INPUT FOR REMINDER-->
+      <div style="width: 90%">
+      <input style="background-color: #212121" id="msg" type="text" class="form-control" name="msg" placeholder="Enter Reminder">
+      </div>
+      <!--REMINDER COMPLETED BUTTON-->
+      <button id="checkButton"></button>
+      <!--DUE DATE-->
+      <p id="font2">10/31/2019</p>
+    </td>
+  </tr>
+  <tr>
+    <td>Email thank you notes
+      <button id="checkButton"></button>
+      <p id="font2">11/3/2019</p>
+    </td>
+  </tr>
+  <tr>
+    <td>Write PHL paper
+      <button id="checkButton"></button>
+      <p id="font2">11/11/2019</p>
+    </td>
+  </tr>
+  </tbody>
+</table>
+<!--<button id="changeColor"></button>-->
+
+<script src="popup.js"></script>
+
+<script>
+  // Change button color here
+  // let butt = document.getElementById("checkButton")
+
+  // butt.addEventListener('onClick', e)
+
+</script>
+
+</body>
+
+</html>
