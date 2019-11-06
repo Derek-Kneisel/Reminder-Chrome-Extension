@@ -20,7 +20,7 @@
       font-size: 14px;
     }
 
-    #font2 {
+    #dueDate1 {
       color: beige;
       font-family: Verdana;
       font-size: 11px;
@@ -39,67 +39,62 @@
       color: beige;
     }
 
+    #addReminderButt {
+      border-radius: 0 !important;
+      background: #212121;
+      border: 1px solid deepskyblue;
+    }
+
+    #addReminderButt:hover {
+      background: deepskyblue;
+    }
+
+    #checkButton:hover {
+      background: deepskyblue;
+    }
+
   </style>
 </head>
 
 <!--ENTER REMINDER-->
 <div class="form-group">
-  <label for="usr">Reminder:</label>
-  <input type="text" class="form-control" id="usr" style="background-color: #212121">
+  <label for="inputedReminder" style="font-size: 14px">Reminder:</label>
+  <input type="text" class="form-control" id="inputedReminder" style="background-color: #212121; color: beige" >
 </div>
 <!--ENTER DUE DATE-->
 <div class="form-group">
-  <label for="pwd">Due Date:</label>
-  <input type="password" class="form-control" id="pwd" style="background-color: #212121">
+  <label for="inputedDueDate">Due Date:</label>
+  <input class="form-control" id="inputedDueDate" style="background-color: #212121; color: beige">
 </div>
-<!--SUBMIT BUTTON-->
-<button type="button" class="btn btn-primary btn-lg btn-block">Block level button</button>
+<!--ADD REMINDER BUTTON-->
+<button type="button" class="btn btn-primary btn-lg btn-block" id="addReminderButt" style="font-size: 14px">Add Reminder</button>
 
+<!--GRID FOR DISPLAYING REMINDERS-->
 <body id="grid1">
 <table class="table">
+  <!--TABLE HEADER-->
   <thead>
   <tr>
     <th style="font-family: Verdana; color: beige">Reminders:</th>
+    <!--DISPLAYS NUMBER OF REMINDERS - ALSO USED FOR LOOPING THROUGH STORAGE-->
+    <th id="numReminders" style="font-family: Verdana; color: beige">0</th>
   </tr>
   </thead>
   <tbody id="font1">
+  <!-- NEW ROW-->
   <tr>
-    <td>Weekly report
-      <!--INPUT FOR REMINDER-->
-      <div style="width: 90%">
-      <input style="background-color: #212121" id="msg" type="text" class="form-control" name="msg" placeholder="Enter Reminder">
-      </div>
+    <!--REMINDER-->
+    <td id="reminder1">Weekly report
       <!--REMINDER COMPLETED BUTTON-->
       <button id="checkButton"></button>
       <!--DUE DATE-->
-      <p id="font2">10/31/2019</p>
-    </td>
-  </tr>
-  <tr>
-    <td>Email thank you notes
-      <button id="checkButton"></button>
-      <p id="font2">11/3/2019</p>
-    </td>
-  </tr>
-  <tr>
-    <td>Write PHL paper
-      <button id="checkButton"></button>
-      <p id="font2">11/11/2019</p>
+      <p id="dueDate1">10/31/2019</p>
     </td>
   </tr>
   </tbody>
 </table>
-<!--<button id="changeColor"></button>-->
 
 <script src="popup.js"></script>
-
-<script>
-  // Change button color here
-  // let butt = document.getElementById("checkButton")
-
-  // butt.addEventListener('onClick', e)
-
-</script>
 
 </body>
 
