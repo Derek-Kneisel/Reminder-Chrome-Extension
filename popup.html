@@ -68,17 +68,15 @@
 </div>
 <!--ADD REMINDER BUTTON-->
 <button type="button" class="btn btn-primary btn-lg btn-block" id="addReminderButt" style="font-size: 14px">Add Reminder</button>
-<button type="button" class="btn btn-primary btn-lg btn-block" id="removeReminderButt" style="font-size: 14px">Remove Reminder</button>
+<button type="button" class="btn btn-primary btn-lg btn-block" id="removeReminderButt" style="font-size: 14px">Remove ALL Reminders</button>
 
 <!--GRID FOR DISPLAYING REMINDERS-->
 <body id="grid1">
-<table class="table">
+<table class="table" id="table">
   <!--TABLE HEADER-->
   <thead>
   <tr>
     <th style="font-family: Verdana; color: beige">Reminders:</th>
-    <!--DISPLAYS NUMBER OF REMINDERS - ALSO USED FOR LOOPING THROUGH STORAGE-->
-    <th id="numReminders" style="font-family: Verdana; color: beige">0</th>
   </tr>
   </thead>
   <tbody id="font1">
@@ -87,7 +85,7 @@
     <!--REMINDER-->
     <td id="reminder1">Weekly report
       <!--REMINDER COMPLETED BUTTON-->
-      <button id="checkButton"></button>
+      <button id="checkButton" style="float: right;"></button>
       <!--DUE DATE-->
       <p id="dueDate1">10/31/2019</p>
     </td>
