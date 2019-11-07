@@ -1,47 +1,7 @@
-//
-// let changeColor = document.getElementById('changeColor');
-//
-// chrome.storage.sync.get('color', function(data) {
-//   changeColor.style.backgroundColor = data.color;
-//   changeColor.setAttribute('value', data.color);
-// });
-//
-// changeColor.onclick = function(element) {
-//   let color = element.target.value;
-//   chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-//     chrome.tabs.executeScript(
-//         tabs[0].id,
-//         {code: 'document.body.style.backgroundColor = "' + color + '";'});
-//   });
-// };
 
 document.body.onload = function() {
 
-    // Holds reminders
-    let reminders = [];
-    // Holds due dates
-    let dueDates = [];
 
-    // Gets number of reminders for looping through storage
-    // let numReminders = parseInt(document.getElementById('numReminders').innerHTML);
-
-    // Gets the reminders from storage
-    chrome.storage.sync.get('reminders', function(items) {
-        if (!chrome.runtime.error) {
-            // console.log(Object.values(items));
-            reminders = items.data;
-            // reminders.push(Object.values(items)[0]);
-        }
-    });
-    // Gets the due dates from storage
-    chrome.storage.sync.get('dueDate', function(items) {
-        if (!chrome.runtime.error) {
-            dueDates.push(Object.values(items)[0]);
-        }
-    });
-    
-    console.log(reminders);
-    // console.log(dueDates);
 
 };
 
@@ -49,61 +9,73 @@ document.body.onload = function() {
 let addReminder = document.getElementById('addReminderButt');
 // Add reminder on click event
 addReminder.addEventListener('click', function () {
+
     // Gets data from inputted reminder and inputted due date
     let reminder = document.getElementById('inputedReminder').value;
     let dueDate = document.getElementById('inputedDueDate').value;
 
-    // Gets number of reminders for looping through storage
-    // let numReminders = parseInt(document.getElementById('numReminders').innerHTML);
-    // numReminders += 1;
-    // Makes an incremented key
-    // let key = numReminders.toString();
+    chrome.storage.sync.get({savedReminders: []}, function (result) {
 
-    // Stores reminders
-    let reminders = [];
+        console.log(result.savedReminders);
 
-    console.log('reminders BEFORE get current:');
-    console.log(reminders);
-
-    // Gets the current reminders
-    chrome.storage.sync.get("reminders", function(items) {
-        if (!chrome.runtime.error) {
-            reminders = items.data;
-        }
     });
 
-    console.log('reminders AFTER get current:');
-    console.log(reminders);
+    reminderID = reminder;
 
-    // Adds the new reminder
-    reminders.push(reminder);
+    // Saving data to storage
+    // by passing an object you can define default values e.g.: []
+    chrome.storage.sync.get({savedReminders: []}, function (result) {
+        // the input argument is ALWAYS an object containing the queried keys
+        // so we select the key we need
+        var remindersTest = result.savedReminders;
 
-    console.log('reminders AFTER adding NEW reminder:');
-    console.log(reminders);
+        console.log('type of data structure: ' + typeof remindersTest);
 
-    // Saves the data (reminders and due dates) with storage api
-    chrome.storage.sync.set({reminders: reminders}, function() {
-        console.log('Value is set to ' + reminders);
-    });
-    chrome.storage.sync.set({'dueDate': dueDate}, function() {
-        console.log('dueDate is set to ' + dueDate);
+        remindersTest.push({reminderID: reminderID, dueDate: dueDate});
+        // set the new array value to the same key
+        chrome.storage.sync.set({savedReminders: remindersTest}, function () {
+            // you can use strings instead of objects
+            // if you don't  want to define default values
+            chrome.storage.sync.get('savedReminders', function (result) {
+                // console.log(result.savedReminders)
+            });
+        });
     });
 
 }, false);
 
-/*
- Tracking changes made to a data object, you can add a listener to its onChanged event
- Whenever anything changes in storage, that event fires
- */
-chrome.storage.onChanged.addListener(function(changes, namespace) {
-    for (var key in changes) {
-        var storageChange = changes[key];
-        console.log('Storage key "%s" in namespace "%s" changed. ' +
-            'Old value was "%s", new value is "%s".',
-            key,
-            namespace,
-            storageChange.oldValue,
-            storageChange.newValue);
-    }
+
+// Delete reminder
+let removeReminder = document.getElementById('removeReminderButt');
+removeReminder.addEventListener('click', function() {
+
+    reminderID = 'testR';
+    dueDate = 'testD';
+
+    // Delete data
+    // By passing an object you can define default values e.g.: []
+    chrome.storage.sync.get({savedReminders: []}, function (result) {
+        // The input argument is ALWAYS an object containing the queried keys
+        // so we select the key we need
+        let reminders = result.savedReminders;
+        
+        // Removes element from reminders/due dates array
+        for (let i = 0; i < reminders.length; i++) {
+            if (reminders[i].reminderID === reminderID) {
+                console.log('got here:', reminders[i].reminderID);
+                reminders.splice(i, 1);
+            }
+        }
+
+        // set the new array value to the same key
+        chrome.storage.sync.set({savedReminders: reminders}, function () {
+            // you can use strings instead of objects
+            // if you don't  want to define default values
+            chrome.storage.sync.get('savedReminders', function (result) {
+                // console.log(result.savedReminders)
+            });
+        });
+    });
+
 });
 
